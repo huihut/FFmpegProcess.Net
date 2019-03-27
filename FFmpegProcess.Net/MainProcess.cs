@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace FFmpegProcess.Net
 {
+    /// <summary>
+    /// 用于测试主进程操作 FFmpeg 进程
+    /// </summary>
     class MainProcess
     {
         static void Main(string[] args)
