@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace FFmpegProcess.Net
 {
     /// <summary>
-    /// 用于测试主进程操作 FFmpeg 进程
+    /// Class for testing the main process operation FFmpeg process
     /// </summary>
     class MainProcess
     {
@@ -17,9 +17,9 @@ namespace FFmpegProcess.Net
         {
             try
             {
-                FFmpegProcess.Instance.Start(DefaultArguments.sPushStreamDesktop);
+                FFmpegProcess.Instance.Start(DefaultArguments.sPushStreamWindow);
 
-                // 等待 1 分钟
+                // Wait 60 seconds
                 Thread.Sleep(60000);
 
                 FFmpegProcess.Instance.Stop();

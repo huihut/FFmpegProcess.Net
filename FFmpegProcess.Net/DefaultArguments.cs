@@ -9,11 +9,12 @@ namespace FFmpegProcess.Net
     public static class DefaultArguments
     {
         // FFmpeg filename
-        public static readonly string sFFmpegFilename = "ffmpeg.exe";
+        public static readonly string sFFmpegFilename = @"FFmpeg\ffmpeg.exe";
 
         // PushStream - https://trac.ffmpeg.org/wiki/Capture/Desktop
-        public static readonly string sPushStreamDesktop = @"-f dshow -i video='screen-capture-recorder' -framerate 30 -b:v 3M -f flv rtmp://localhost:1935/live";
-        public static readonly string sPushStreamWindow = "-f gdigrab -framerate 30 -i title=Calculator -b:v 3M -f flv rtmp://localhost.213:1935/live";
+        // Dependencies - https://github.com/rdp/screen-capture-recorder-to-video-windows-free
+        public static readonly string sPushStreamDesktop = @"-f dshow -i video='screen-capture-recorder' -framerate 15 -b:v 3M -f flv rtmp://localhost:1935/live";
+        public static readonly string sPushStreamWindow = @"-f gdigrab -framerate 15 -i title=Calculator -b:v 3M -f flv rtmp://localhost:1935/live";
 
     }
 }

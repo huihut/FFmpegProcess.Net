@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace FFmpegProcess.Net
 {
     /// <summary>
-    /// FFmpeg 进程
+    /// FFmpeg Process
     /// </summary>
     public class FFmpegProcess
     {
         private Process process;
 
-        // FFmpeg 进程的单例
+        // Singleton mode
         private static FFmpegProcess instance = new FFmpegProcess();
         public static FFmpegProcess Instance
         {
@@ -33,9 +33,9 @@ namespace FFmpegProcess.Net
         }
 
         /// <summary>
-        /// 开始执行 FFmpeg 进程
+        /// Start executing the FFmpeg process
         /// </summary>
-        /// <param name="args">FFmpeg 参数</param>
+        /// <param name="args">FFmpeg parameters</param>
         public void Start(string args)
         {
             try
@@ -59,7 +59,7 @@ namespace FFmpegProcess.Net
         }
 
         /// <summary>
-        /// 结束 FFmpeg 进程
+        /// Terminate the FFmpeg process
         /// </summary>
         public void Stop()
         {
