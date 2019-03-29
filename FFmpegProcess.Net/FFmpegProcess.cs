@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FFmpegProcess.Net
@@ -25,6 +26,7 @@ namespace FFmpegProcess.Net
 
         private FFmpegProcess()
         {
+            process = new Process();
         }
         
         ~FFmpegProcess()
@@ -40,17 +42,16 @@ namespace FFmpegProcess.Net
         {
             try
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-
-                startInfo.CreateNoWindow = true;
-                startInfo.UseShellExecute = false;
-                startInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DefaultArguments.sFFmpegFilename);
-                startInfo.Arguments = args;
-                startInfo.RedirectStandardOutput = true;
-                Debug.WriteLine(string.Format("Executing \"{0}\" with arguments \"{1}\".\r\n", startInfo.FileName, startInfo.Arguments));
-
-                if (process == null)
-                    process = Process.Start(startInfo);
+                if(process != null)
+                {
+                    process.StartInfo.CreateNoWindow = true;
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DefaultArguments.sFFmpegFilename);
+                    process.StartInfo.Arguments = args;
+                    process.StartInfo.RedirectStandardOutput = true;
+                    process.Start();
+                    Debug.WriteLine(string.Format("Executing \"{0}\" with arguments \"{1}\".\r\n", process.StartInfo.FileName, process.StartInfo.Arguments));
+                }
             }
             catch (Exception e)
             {
@@ -67,7 +68,16 @@ namespace FFmpegProcess.Net
             {
                 if (process != null)
                 {
-                    process.Kill();
+                    KernelWrapper.AttachConsole(process.Id);
+                    KernelWrapper.SetConsoleCtrlHandler(IntPtr.Zero, true);
+                    KernelWrapper.GenerateConsoleCtrlEvent(0, 0);
+
+                    // Wait 2 seconds
+                    Thread.Sleep(2000);
+
+                    KernelWrapper.SetConsoleCtrlHandler(IntPtr.Zero, false);
+                    KernelWrapper.FreeConsole();
+
                     process = null;
                 }
             }

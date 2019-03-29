@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="DefaultArguments.cs" />
     <Compile Include="FFmpegProcess.cs" />
+    <Compile Include="KernelWrapper.cs" />
     <Compile Include="MainProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
